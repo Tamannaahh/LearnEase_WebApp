@@ -1,0 +1,187 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="text-center">
+    <div class="container">
+
+        <!-- To-Do Section -->
+        {% if not todos_done %}
+        <h2 class="section-title text-info">Due ToDos</h2>
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for todo in todos %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ todo.title }}</td>
+                        <td>
+                            <a href="{% url 'update-todo' todo.id %}">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" {% if todo.is_finished %}checked{% endif %}>
+                                    <label class="form-check-label">Mark as Completed</label>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete-todo' todo.id %}" class="delete-btn">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <h3 class="text-success">All To-Dos are completed!</h3>
+        {% endif %}
+        <a href="{% url 'todo' %}" class="btn manage-btn">Manage To-Do</a>
+
+        <br><br>
+
+        <!-- Homework Section -->
+        {% if not homeworks_done %}
+        <h2 class="section-title text-info">Due Homeworks</h2>
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Due</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for homework in homeworks %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ homework.subject }}</td>
+                        <td>{{ homework.title }}</td>
+                        <td>{{ homework.description }}</td>
+                        <td>{{ homework.due }}</td>
+                        <td>
+                            <a href="{% url 'update-homework' homework.id %}">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" {% if homework.is_finished %}checked{% endif %}>
+                                    <label class="form-check-label">Mark as Completed</label>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete-homework' homework.id %}" class="delete-btn">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <h3 class="text-success">All Homeworks are completed!</h3>
+        {% endif %}
+        <a href="{% url 'homework' %}" class="btn manage-btn">Manage Homework</a>
+
+    </div>
+</section>
+
+<style>
+
+     .container {
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .table-container {
+        margin: 20px 0;
+        overflow-x: auto;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 1rem;
+        text-align: left;
+        border-radius: 10px;
+        overflow: hidden;
+        color: #ffffff;
+    }
+
+    .styled-table thead tr {
+        background-color: #004080; /* Bright blue for headers */
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid #004080;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #002b5c; /* Alternating row colors */
+    }
+
+    .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #004080;
+    }
+
+    .delete-btn {
+        color: #ff4d4d;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .delete-btn:hover {
+        color: #ff6666;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        color: #001f3f;
+    }
+
+    .manage-btn {
+        background-color: #00d4ff; /* Bright blue */
+        margin-top: 20px;
+    }
+
+    .manage-btn:hover {
+        background-color: #008fb3;
+        color: #ffffff;
+    }
+</style>
+{% endblock content %}

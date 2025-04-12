@@ -1,0 +1,122 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="center-container">
+    <div class="container text-center">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <legend class="border-bottom mb-4">Conversion calculator</legend>
+                {{form}}
+                <button href="" type="submit">Select</button>
+            </div>
+            {% if input %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Conversion Details</legend>
+                <div class="row">
+                    {{ m_form.input }}
+                </div>
+                <div class="row">
+                    {{ m_form.measure1 }}
+                </div>
+                <div class="row">
+                    {{ m_form.measure2 }}
+                </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Result</legend>
+                {{answer}}
+            </fieldset>
+            <div class="form-group">
+                <button href="" type="submit">Convert</button>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000d1a; /* Dark navy blue background */
+        color: #ededed; /* Light text for readability */
+        margin: 0;
+        padding: 0;
+    }
+
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Full viewport height for centering */
+    }
+
+    .container {
+        width: 400px;
+        padding: 20px;
+        background-color: #081b29; /* Slightly lighter navy for the form background */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+        border-radius: 10px;
+        text-align: left;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    form legend {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #00d4ff; /* Bright cyan for the legend */
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    form button {
+        background-color: #00d4ff; /* Bright cyan button */
+        color: #081b29; /* Dark text on button */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    form button:hover {
+        background-color: #008fb3; /* Slightly darker cyan on hover */
+    }
+
+    input[type="text"], input[type="number"], select, textarea {
+        padding: 10px;
+        font-size: 1em;
+        width: 100%;
+        border: 1px solid #00d4ff; /* Cyan border */
+        border-radius: 5px;
+        background-color: #081f2f; /* Dark navy blue */
+        color: #00d4ff; /* Cyan text */
+        margin-bottom: 10px;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #00ffcc; /* Lighter cyan border on focus */
+        background-color: #003366; /* Slightly brighter navy when focused */
+    }
+
+    fieldset {
+        border: 1px solid #00d4ff;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .row {
+        margin-bottom: 15px;
+    }
+</style>
+
+
+{% endblock content %}

@@ -1,0 +1,149 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center">Sudoku Game</h2>
+    <p class="text-center">Fill the grid with numbers from 1 to 9. Click "Check Solution" to validate your answers.</p>
+
+    <form id="sudoku-form" method="post">
+        {% csrf_token %}
+        <div class="sudoku-grid">
+            {% for row in sudoku %}
+                <div class="sudoku-row">
+                    {% for cell in row %}
+                        <input 
+                            type="text" 
+                            name="cell_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" 
+                            maxlength="1" 
+                            class="sudoku-cell" 
+                            value="{{ cell|default:'' }}" 
+                            {% if cell %} readonly {% endif %}
+                            oninput="validateInput(this)"
+                        />
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="number-selection">
+            <label>Select Number:</label>
+            {% for num in range %}
+                <button 
+                    type="button" 
+                    class="number-btn" 
+                    onclick="selectNumber({{ num }})">
+                    {{ num }}
+                </button>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Check Solution</button>
+        <button type="submit" name="reset" value="reset" class="btn btn-warning mt-3">Reset</button>
+    </form>
+
+    {% if error %}
+    <div class="alert alert-danger mt-3">
+        {{ error }}
+    </div>
+    {% endif %}
+    
+    {% if success %}
+    <div class="alert alert-success mt-3">
+        {{ success }}
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    let selectedNumber = null;
+
+    function selectNumber(num) {
+        selectedNumber = num;
+
+        // Highlight all occurrences of the selected number
+        document.querySelectorAll('.sudoku-cell').forEach(cell => {
+            if (cell.value == num) {
+                cell.classList.add('highlight');
+            } else {
+                cell.classList.remove('highlight');
+            }
+
+            // Allow placing the selected number
+            cell.addEventListener('click', function() {
+                if (!this.hasAttribute('readonly')) {
+                    this.value = selectedNumber;
+                }
+            });
+        });
+    }
+
+    function validateInput(input) {
+        const value = input.value;
+        if (value && (isNaN(value) || value < 1 || value > 9)) {
+            input.value = ''; // Clear invalid input
+        }
+    }
+</script>
+
+<style>
+    body {
+        background-color: #000d1a;
+        color: #ffffff;
+    }
+
+    .container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .sudoku-grid {
+        display: grid;
+        grid-template-rows: repeat(9, 1fr);
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .sudoku-row {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        gap: 5px;
+    }
+
+    .sudoku-cell {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        font-size: 20px;
+        border: 1px solid #00d4ff;
+        background-color: #081b29;
+        color: #ffffff;
+    }
+
+    .sudoku-cell[readonly] {
+        background-color: #003366;
+        font-weight: bold;
+    }
+
+    .highlight {
+        background-color: #00b894 !important;
+    }
+
+    .number-selection {
+        margin-top: 20px;
+    }
+
+    .number-btn {
+        margin: 5px;
+        padding: 5px 15px;
+        border: 1px solid #00d4ff;
+        background-color: #00d4ff;
+        color: #ffffff;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .number-btn:hover {
+        background-color: #008fb3;
+    }
+</style>
+
+{% endblock content %}

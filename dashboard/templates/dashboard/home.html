@@ -1,0 +1,176 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="container text-center mt-3">
+  <!-- Slogan and Welcome Section -->
+  <div class="welcome-section">
+    <h2 class="display-4 text-light" style="font-size: 2.5rem; font-weight: bold;">Unlock Your Learning Journey with LearnEase</h2>
+    <p class="lead text-light mb-4" style="font-size: 1.25rem;">
+      Dive into a world of knowledge with tools and resources designed to enhance your learning experience.
+      Create QuickNotes, track Assignments, and access educational content all in one place. Start now and make learning easier!
+    </p>
+    <hr class="my-4" style="border-color: #fff;">
+  </div>
+
+  <!-- Feature Cards -->
+  <div class="row">
+    <!-- Notes Card -->
+    <div class="col-md-3 mb-4 d-flex">
+      <a href="{% url 'notes' %}">
+        <div class="card shadow-lg flex-fill">
+          <img class="card-img-top" src="{% static 'images/notes.jpg' %}" alt="Notes image">
+          <div class="card-body text-center" style="padding: 20px;">
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">QuickNotes</h5>
+            <p style="font-size: 1.1rem; color: #ededed;">
+              Capture and save your QuickNotes securely. Access them anytime, anywhere, for all your study needs.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Homework Card -->
+    <div class="col-md-3 mb-4 d-flex">
+      <a href="{% url 'homework' %}">
+        <div class="card shadow-lg flex-fill">
+          <img class="card-img-top" src="{% static 'images/homework.jpg' %}" alt="Homework image">
+          <div class="card-body text-center" style="padding: 20px;">
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">Assignments</h5>
+            <p style="font-size: 1.1rem; color: #ededed;">
+              Effortlessly track assignments, manage deadlines, stay organized, and stay on top of your academic goals.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- YouTube Card -->
+    <div class="col-md-3 mb-4 d-flex">
+      <a href="{% url 'youtube' %}">
+        <div class="card shadow-lg flex-fill">
+          <img class="card-img-top" src="{% static 'images/youtube.jpg' %}" alt="YouTube image">
+          <div class="card-body text-center" style="padding: 20px;">
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">MediaHub</h5>
+            <p style="font-size: 1.1rem; color: #ededed;">
+              Discover educational videos and stream them effortlessly within MediaHub for a smooth and engaging experience.            
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- To-Do Card -->
+    <div class="col-md-3 mb-4 d-flex">
+      <a href="{% url 'todo' %}">
+        <div class="card shadow-lg flex-fill">
+          <img class="card-img-top" src="{% static 'images/todo.jpeg' %}" alt="To-Do image">
+          <div class="card-body text-center" style="padding: 20px;">
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">Task-Hive</h5>
+            <p style="font-size: 1.1rem; color: #ededed;">
+              Stay organized and conquer your day with TaskHive—your go-to hub for creating and managing tasks.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Additional Feature Cards -->
+  <div class="row">
+    <!-- Books Card -->
+    <div class="col-md-3 mb-4 d-flex">
+      <a href="{% url 'books' %}">
+        <div class="card shadow-lg flex-fill">
+          <img class="card-img-top" src="{% static 'images/books2.jpeg' %}" alt="Books image">
+          <div class="card-body text-center" style="padding: 20px;">
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">Readiverse</h5>
+            <p style="font-size: 1.1rem; color: #ededed;">
+              Discover a universe of books tailored for your studies, neatly organized to provide the ultimate learning experience.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Dictionary Card -->
+    <div class="col-md-3 mb-4 d-flex">
+      <a href="{% url 'dictionary' %}">
+        <div class="card shadow-lg flex-fill">
+          <img class="card-img-top" src="{% static 'images/dictionary.jpg' %}" alt="Dictionary image">
+          <div class="card-body text-center" style="padding: 20px;">
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">WordNavigator</h5>
+            <p style="font-size: 1.1rem; color: #ededed;">
+              Lost in a word? Let WordNavigator guide you with instant meanings, synonyms, and accurate pronunciations.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Wikipedia Card -->
+    <div class="col-md-3 mb-4 d-flex">
+      <a href="{% url 'wiki' %}">
+        <div class="card shadow-lg flex-fill">
+          <img class="card-img-top" src="{% static 'images/wiki.jpeg' %}" alt="Wikipedia image">
+          <div class="card-body text-center" style="padding: 20px;">
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">InfoPedia</h5>
+            <p style="font-size: 1.1rem; color: #ededed;">
+              Search for information on InfoPedia to effortlessly find the facts you need for your studies and projects. 
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Conversion Card -->
+    <div class="col-md-3 mb-4 d-flex">
+      <a href="{% url 'conversion' %}">
+        <div class="card shadow-lg flex-fill">
+          <img class="card-img-top" src="{% static 'images/conversion.jpg' %}" alt="Conversion image">
+          <div class="card-body text-center" style="padding: 20px;">
+            <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">Conversion</h5>
+            <p style="font-size: 1.1rem; color: #ededed;">
+              Utilize the conversion table to easily switch between units of measurement for your assignments or everyday needs.
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+ 
+
+  <!-- Learning Games Card -->
+<div class="col-md-3 mb-4 d-flex">
+  <a href="{% url 'games' %}">
+    <div class="card shadow-lg flex-fill">
+      <img class="card-img-top" src="{% static 'images/game1.png' %}" alt="Learning Games image">
+      <div class="card-body text-center" style="padding: 20px;">
+        <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">EduPlay</h5>
+        <p style="font-size: 1.1rem; color: #ededed;">
+          Explore engaging and educational games on EduPlay to enhance your knowledge and make learning fun.
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- Career Counseling Card -->
+<div class="col-md-3 mb-4 d-flex">
+  <a href="{% url 'career' %}">
+    <div class="card shadow-lg flex-fill">
+      <img class="card-img-top" src="{% static 'images/career2.jpg' %}" alt="Career Counseling image">
+      <div class="card-body text-center" style="padding: 20px;">
+        <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold;">CareerQuest</h5>
+        <p style="font-size: 1.1rem; color: #ededed;">
+          Embark on a journey of self-discovery with CareerQuest to unlock your true potential and plan your future with confidence.
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+
+</section>
+
+{% endblock content %}

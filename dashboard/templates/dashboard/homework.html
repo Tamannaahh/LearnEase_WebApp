@@ -1,0 +1,104 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %}
+{% block content %}
+
+<div class="container my-5">
+    <div class="card bg-dark text-light shadow-lg">
+        <div class="card-header text-center bg-primary text-white">
+            <h2>Manage Your Assignments</h2>
+        </div>
+        <div class="card-body">
+
+            <!-- Display the Homework Table -->
+            {% if not homework_done %}
+            <div class="table-responsive">
+                <table class="table table-hover table-dark text-center">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Subject</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for homework in homeworks %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ homework.subject }}</td>
+                            <td>{{ homework.title }}</td>
+                            <td>{{ homework.description }}</td>
+                            <td>{{ homework.due }}</td>
+                            <td>
+                                <a href="{% url 'update-homework' homework.id %}" class="btn btn-outline-success btn-sm">
+                                    {% if homework.is_finished == True %}
+                                    <i class="fa fa-check-circle"></i> Completed
+                                    {% else %}
+                                    <i class="fa fa-circle"></i> Pending
+                                    {% endif %}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'delete-homework' homework.id %}" class="btn btn-outline-danger btn-sm">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <h4 class="text-center text-success">All Assignments is completed! Add more tasks below.</h4>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<!-- Create Homework Form -->
+<div class="container my-5">
+    <div class="card bg-dark text-light shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Create a New Assignment</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" class="p-4">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Assignment Details</legend>
+                    <div class="form-group">
+                        <label for="id_subject" class="form-label">Subject</label>
+                        <input type="text" name="subject" maxlength="100" class="form-control bg-dark text-light border-primary" id="id_subject" placeholder="Enter subject" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="id_title" class="form-label">Title</label>
+                        <input type="text" name="title" maxlength="100" class="form-control bg-dark text-light border-primary" id="id_title" placeholder="Enter homework title" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="id_description" class="form-label">Description</label>
+                        <textarea name="description" rows="4" class="form-control bg-dark text-light border-primary" id="id_description" placeholder="Enter homework description" required></textarea>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="id_due" class="form-label">Due Date</label>
+                        <input type="date" name="due" class="form-control bg-dark text-light border-primary" id="id_due" required>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input type="checkbox" class="form-check-input" id="is_finished" name="is_finished">
+                        <label class="form-check-label text-light" for="is_finished">Mark as Finished</label>
+                    </div>
+                </fieldset>
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-info btn-lg" type="submit">
+                        <i class="fa fa-plus-circle"></i> Add Assignment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

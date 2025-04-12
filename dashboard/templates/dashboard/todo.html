@@ -1,0 +1,86 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %}
+{% block content %}
+
+<div class="container my-5">
+    <div class="card bg-dark text-light shadow-lg">
+        <div class="card-header text-center bg-primary text-white">
+            <h2>Manage Your Task List</h2>
+        </div>
+        <div class="card-body">
+
+            <!-- Display the Todos Table -->
+            {% if not todos_done %} 
+            <div class="table-responsive">
+                <table class="table table-hover table-dark text-center">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for todo in todos %} 
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ todo.title }}</td>
+                            <td>
+                                <a href="{% url 'update-todo' todo.id %}" class="btn btn-outline-success btn-sm">
+                                    {% if todo.is_finished == True %}
+                                    <i class="fa fa-check-circle"></i> Completed
+                                    {% else %}
+                                    <i class="fa fa-circle"></i> Pending
+                                    {% endif %}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'delete-todo' todo.id %}" class="btn btn-outline-danger btn-sm">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <h4 class="text-center text-success">All tasks have been completed! Add more todos below.</h4>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<!-- Create Todo Form -->
+<div class="container my-5">
+    <div class="card bg-dark text-light shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Create a New Task</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" class="p-4">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Task Details</legend>
+                    <div class="form-group">
+                        <label for="id_title" class="form-label">Task Title</label>
+                        <input type="text" name="title" maxlength="100" class="form-control bg-dark text-light border-primary" id="id_title" required>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input type="checkbox" class="form-check-input" id="is_finished" name="is_finished">
+                        <label class="form-check-label text-light" for="is_finished">Mark as Finished</label>
+                    </div>
+                </fieldset>
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-info btn-lg" type="submit">
+                        <i class="fa fa-plus-circle"></i> Add Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

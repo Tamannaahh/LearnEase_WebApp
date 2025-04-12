@@ -1,0 +1,60 @@
+{% extends 'dashboard/base.html' %}
+{% load static %} 
+{% block content %}
+
+<div class="logout-container">
+  <h2>You are logged Out</h2>
+  <small class="text-muted">
+    <a class="btn btn-danger" href="{% url 'login' %}">Log In Again</a>
+  </small>
+</div>
+
+<style>
+  body {
+      background-color: #000d1a; /* Dark navy blue background */
+      color: #ededed; /* Light text for readability */
+      font-family: Arial, sans-serif;
+  }
+
+  .logout-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80vh; /* Center the content vertically */
+      text-align: center;
+      background-color: #081b29; /* Slightly lighter navy section background */
+      border: 2px solid #00d4ff; /* Cyan border around the section */
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Subtle shadow */
+  }
+
+  .logout-container h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00d4ff; /* Bright cyan for the heading */
+  }
+
+  .logout-container small a {
+      text-decoration: none;
+      color: #fff;
+      background-color: #00d4ff; /* Cyan button background */
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Button shadow */
+  }
+
+  .logout-container small a:hover {
+      background-color: #008fb3; /* Slightly darker cyan on hover */
+  }
+
+  .logout-container small {
+      font-size: 1rem;
+      color: #ededed; /* Light muted text */
+  }
+</style>
+
+{% endblock content %}

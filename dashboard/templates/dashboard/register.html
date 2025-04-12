@@ -1,0 +1,123 @@
+{% extends 'dashboard/base.html' %}
+{% load static %} 
+{% block content %}
+
+<div class="container">
+  <form method="POST" class="form-container"> 
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="form-title border-bottom mb-4">Join Today</legend>
+      {{ form }}
+    </fieldset>
+    <div class="form-group">
+      <button class="btn-submit" type="submit">Sign Up</button>
+    </div>
+    <div class="extra-section">
+      <small class="text-muted">Already have an account? 
+        <a class="btn-link ml-2" href="{% url 'login' %}">Sign In</a>
+      </small>
+    </div>
+  </form>
+</div>
+
+<style>
+  .container {
+      margin-top: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+  }
+
+  .form-container {
+      width: 500px;
+      padding: 40px;
+      background-color: #081b29;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  .form-title {
+      font-size: 2rem;
+      color: #00d4ff;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+  }
+
+  .form-group input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #00d4ff;
+      border-radius: 8px;
+      background-color: #0e2a38;
+      color: #ededed;
+      font-size: 1rem;
+  }
+
+  .form-group input:focus {
+      outline: none;
+      border-color: #008fb3;
+      box-shadow: 0 0 10px #00d4ff;
+  }
+
+  .btn-submit {
+      width: 100%;
+      background-color: #00d4ff;
+      color: #000d1a;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+  }
+
+  .btn-submit:hover {
+      background-color: #008fb3;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 212, 255, 0.5);
+  }
+
+  .extra-section {
+      text-align: center;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #00d4ff;
+  }
+
+  .extra-section small {
+      color: #ededed;
+  }
+
+  .btn-link {
+      color: #00d4ff;
+      font-weight: bold;
+      text-decoration: none;
+  }
+
+  .btn-link:hover {
+      text-decoration: underline;
+      color: #008fb3;
+  }
+
+  @media (max-width: 480px) {
+      .form-container {
+          width: 90%;
+          padding: 20px;
+      }
+
+      .form-title {
+          font-size: 1.8rem;
+      }
+
+      .btn-submit {
+          font-size: 1rem;
+      }
+  }
+</style>
+
+{% endblock content %}

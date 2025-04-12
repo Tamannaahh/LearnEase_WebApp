@@ -1,0 +1,218 @@
+/* Google Fonts import */
+@import url("https://fonts.googleapis.com/css?family=Acme|Lobster|Patua+One|Rubik|Sniglet|Quicksand|Barlow");
+
+/* General Styles */
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: #000d1a; /* Dark navy blue background */
+    color: #f0f0f0; /* Light gray text for good contrast */
+    font-family: Barlow, Quicksand, Rubik, sans-serif, serif, 'Times New Roman', Times, serif !important;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+footer {
+    font-family: Rubik, sans-serif, serif, 'Times New Roman', Times, serif;
+    background-color: #003366; /* Deep blue footer */
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+.main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #003366; /* Dark blue background */
+    border-bottom: 2px solid #00d4ff; /* Highlight bottom border */
+}
+
+.nav-link {
+    color: #ffffff !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 20px;
+}
+
+.nav-link:hover {
+    background-color: #00d4ff;
+    color: #000d1a;
+    transition: 0.7s ease;
+}
+
+/* Card Styling */
+.card {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #081b29; /* Darker card background */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card-header {
+    background-color: #152b42; /* Dark blue header */
+    color: #00d4ff;
+    font-size: 20px;
+    padding: 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.card-header:hover {
+    background-color: #003366;
+    color: #ffffff;
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+
+/* Image Styling */
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card-img-top:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+/* Text Styling */
+h4, h6 {
+    margin: 20px 30px;
+    color: #f0f0f0;
+}
+
+.card p {
+    text-align: right;
+    margin-right: 50px;
+    color: #c1c1c1;
+    line-height: 1.5;
+}
+
+.card h4, .card h6 {
+    color: #ffffff;
+}
+
+/* Button Styling */
+.button {
+    display: inline-block;
+    font-family: "Montserrat", "Trebuchet MS", Helvetica, sans-serif;
+    padding: 0.8em 1.4em;
+    background-color: #00d4ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #003366;
+    color: #ffffff;
+}
+
+/* Scrollbar Styling */
+.example::-webkit-scrollbar {
+    display: none;
+}
+
+/* Icon Styling */
+.fa:hover {
+    color: #00d4ff;
+}
+
+.fa {
+    color: #c1c1c1;
+}
+
+/* Custom Footer Styling */
+footer .container-fluid {
+    padding: 5vmin;
+}
+
+footer .column a+a {
+    padding: 0 0.7em;
+}
+
+/* Image Styles */
+.account-img {
+    height: 125px !important;
+    width: 125px !important;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+    color: #00d4ff;
+}
+
+/* Content Section */
+.content-section {
+    background: #152b42;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #003366;
+}
+
+.content-section a:hover {
+    background: #00d4ff;
+}
+
+/* Hover Effects for Cards */
+.card:hover {
+    opacity: 0.95;
+    transform: scale(1.03);
+    transition: 0.5s ease;
+}
+
+/* Button Hover Effects */
+.btn:hover {
+    background-color: #003366;
+    color: #ffffff;
+    border: 1px solid #00d4ff;
+}
+
+/* Adjustments for Image and Text Inside Cards */
+.card .row {
+    display: flex;
+    align-items: center;
+}
+
+.card-header .col-md-5 {
+    width: 40%;
+    padding: 0;
+}
+
+.card-header .col-md-7 {
+    width: 60%;
+    padding-left: 20px;
+}
+
+/* Special Hover Effects */
+.custom-header:hover {
+    background: rgb(143, 189, 186) !important;
+}
+
+.card-header h5 {
+    font-size: 16px;
+    color: #00d4ff;
+}
+
+.card-header h6 {
+    font-size: 14px;
+    color: #c1c1c1;
+}

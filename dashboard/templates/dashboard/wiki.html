@@ -1,0 +1,163 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<section class='text-center container'>
+    <h2 class="page-title">Search articles in InfoPedia</h2>
+    <p class="description">Just enter the search query to obtain the results</p>
+    <b class="note">Enter without any space</b>
+    <form action="" method="post" class="search-form">
+        {% csrf_token %}
+        {{form}}
+        <input class="btn btn-submit" type="submit" value="Submit">
+    </form><br>
+
+    {% if title %}
+    <div class="result-container">
+        <a href="" class="result-link" target="_blank">
+            <div class="custom-header">
+                <h2 class="result-title">{{title}}</h2>
+                <h6 class="result-link-text">{{link}}</h6>
+            </div>
+        </a>
+
+        <hr class="divider">
+        <p class="result-description">
+            {{details}}
+        </p>
+        <hr class="divider">
+    </div>
+    {% endif %}
+
+</section>
+
+<style>
+    /* General Body Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #000d1a; /* Dark navy background */
+        color: #ededed; /* Light text color */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Page Title and Description */
+    .page-title {
+        color: #00d4ff; /* Cyan text color */
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: #bfbfbf; /* Light gray text */
+    }
+
+    .note {
+        color: #ff7675; /* Soft red for the note */
+        font-weight: bold;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    /* Search Form */
+    .search-form {
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-form input[type="text"] {
+        padding: 10px;
+        font-size: 1.2rem;
+        border: 1px solid #00d4ff;
+        border-radius: 5px;
+        background-color: #081f2f;
+        color: #ededed;
+        margin-bottom: 15px;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .search-form input[type="text"]:focus {
+        outline: none;
+        border-color: #00ffcc;
+        background-color: #003366;
+    }
+
+    .btn-submit {
+        background-color: #00d4ff;
+        color: #081b29;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #008fb3; /* Slightly darker cyan */
+        color: #fff;
+    }
+
+    /* Results Section */
+    .result-container {
+        margin-top: 30px;
+        background-color: #081b29; /* Slightly lighter navy */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    }
+
+    .result-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .custom-header {
+        text-align: left;
+        margin-bottom: 15px;
+    }
+
+    .result-title {
+        color: #00d4ff; /* Cyan for the title */
+        font-size: 1.8rem;
+        margin: 0;
+    }
+
+    .result-link-text {
+        color: #bfbfbf; /* Light gray for the link */
+        font-size: 1rem;
+        margin-top: 5px;
+    }
+
+    .divider {
+        border: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #00d4ff, transparent);
+        margin: 20px 0;
+    }
+
+    .result-description {
+        font-size: 1.2rem;
+        color: #ededed;
+        line-height: 1.6;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .search-form input[type="text"] {
+            width: 90%;
+        }
+
+        .result-container {
+            padding: 15px;
+        }
+    }
+</style>
+
+{% endblock content %}

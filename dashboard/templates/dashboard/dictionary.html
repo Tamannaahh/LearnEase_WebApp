@@ -1,0 +1,70 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<section style="background-color: #000d1a; color: white; padding: 40px 20px; border-radius: 15px; font-family: 'Arial', sans-serif; text-align: center;">
+    <h2 style="color: #00d4ff; font-size: 3rem; font-weight: bold; margin-bottom: 10px;">WordNavigator Dictionary</h2>
+    <p style="color: #00b894; font-size: 1.2rem;">Find phonetics, definitions, examples, and synonyms for any word.</p>
+
+    <!-- Search Form -->
+
+    <form action="" method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+            {{ form.as_p }}
+            <input type="submit" value="Search" 
+                   style="background-color: #003366; color: white; padding: 10px 20px; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+        </div>
+    </form>
+
+    <!-- Results Section -->
+    <div style="margin-top: 40px;">
+        {% if input %}
+        <div style="background-color: #081b29; color: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); display: inline-block; text-align: center; max-width: 600px; margin: 0 auto;">
+            <!-- Word -->
+            <h3 style="color: #00d4ff; font-size: 2.5rem; font-weight: bold; margin-bottom: 10px;">{{ input }}</h3>
+            <!-- Phonetics -->
+            <h4 style="color: #00b894; font-size: 1.2rem; font-style: italic;">{{ phonetics }}</h4>
+
+            <!-- Audio -->
+            {% if audio %}
+            <div style="margin-top: 20px;">
+                <audio id="player" src="{{ audio }}"></audio>
+                <button onclick="document.getElementById('player').play()" 
+                        style="background-color: #00b894; color: white; padding: 10px 20px; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+                    <i class="fa fa-volume-up"></i> Play Audio
+                </button>
+            </div>
+            {% else %}
+            <p style="color: #ffcc00; font-size: 1rem; margin-top: 10px;">Audio not available for this word.</p>
+            {% endif %}
+
+            <!-- Definition -->
+            <h4 style="color: #00d4ff; margin-top: 30px; font-size: 1.5rem;">Definition:</h4>
+            <p style="color: white; font-size: 1.2rem;">{{ definition }}</p>
+
+            <!-- Example -->
+            {% if example %}
+            <h4 style="color: #00d4ff; margin-top: 20px; font-size: 1.5rem;">Example:</h4>
+            <p style="color: white; font-size: 1.2rem;">{{ example }}</p>
+            {% endif %}
+
+            <!-- Synonyms -->
+            <h4 style="color: #00d4ff; margin-top: 20px; font-size: 1.5rem;">Synonyms:</h4>
+            {% if synonyms %}
+            <div style="color: white; font-size: 1.2rem; margin-top: 10px; text-align: center;">
+                {% for synonym in synonyms %}
+                <span style="background-color: #003366; color: #00d4ff; padding: 5px 10px; margin: 5px; border-radius: 5px; display: inline-block;">{{ synonym }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p style="color: #ffcc00; font-size: 1rem;">No synonyms available for this word.</p>
+            {% endif %}
+        </div>
+        {% else %}
+        <h4 style="color: #dc3545; text-align: center; margin-top: 50px; font-size: 1.5rem;">
+            Sorry, no results found. Please try a different word.
+        </h4>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

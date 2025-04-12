@@ -1,0 +1,245 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<body>
+    <div class="container">
+        <h1>CareerQuest</h1>
+        <p>Select your preferences, abilities, and interests to discover career opportunities!</p>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            
+            <!-- Card Container with Flexbox -->
+            <div class="card-container">
+                <!-- Are you interested in... Section -->
+                <div class="card">
+                    <h3>1. Are you interested in...</h3>
+                    <div class="checkbox-group">
+                        {% for interest in interests %}
+                        <label>
+                            <input type="checkbox" name="interests" value="{{ interest }}">
+                            {{ interest }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- You can... Section -->
+                <div class="card">
+                    <h3>2. You can...</h3>
+                    <div class="checkbox-group">
+                        {% for ability in abilities %}
+                        <label>
+                            <input type="checkbox" name="abilities" value="{{ ability }}">
+                            {{ ability }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Would you like to... Section -->
+                <div class="card">
+                    <h3>3. Would you like to...</h3>
+                    <div class="checkbox-group">
+                        {% for preference in preferences %}
+                        <label>
+                            <input type="checkbox" name="preferences" value="{{ preference }}">
+                            {{ preference }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Suggest Jobs</button>
+        </form>
+
+        <!-- Job Suggestions -->
+        {% if jobs %}
+        <div class="mt-5">
+            <h3 style="text-align: center; color: #00d4ff;">Job Opportunities</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Visit Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in jobs %}
+                    <tr>
+                        <td>{{ job.title }}</td>
+                        <td>{{ job.company }}</td>
+                        <td>{{ job.location }}</td>
+                        <td><a href="{{ job.link }}" target="_blank">Visit</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% elif error %}
+        <p style="text-align: center; color: red;">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+
+<style>
+    /* General Styling */
+    body {
+        background-color: #0d1a26;
+        color: #ffffff;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #1a2d40;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+        color: #00bcd4;
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    p {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #c5c5c5;
+    }
+
+    form {
+        margin-top: 30px;
+    }
+
+    /* Flex Container for Cards */
+    .card-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background-color: #10263b;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        flex: 1;
+        min-width: 280px;  /* Minimum width of each card */
+        max-width: 30%;    /* Maximum width to ensure 3 cards fit in row */
+        margin-bottom: 30px;
+    }
+
+    .card h3 {
+        color: #00d4ff;
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+
+    /* Widening checkbox group */
+    .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;   /* Increased gap between each checkbox */
+        max-width: 320px; /* Making checkbox section a bit wider */
+    }
+
+    .checkbox-group label {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        background-color: #0d1f33;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Styling checkboxes */
+    .checkbox-group input[type="checkbox"] {
+        margin-right: 10px;
+        cursor: pointer;
+        accent-color: #00d4ff;  /* Set checked state to blue */
+    }
+
+    .checkbox-group label:hover {
+        background-color: #0b2a4d;
+    }
+
+    /* Submit Button */
+    .btn {
+        display: block;
+        width: 100%;
+        background-color: #00b894;
+        color: #ffffff;
+        font-size: 1.3rem;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+        background-color: #009974;
+        transform: scale(1.05);
+    }
+
+    /* Job Table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 1.1rem;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #00d4ff;
+    }
+
+    th {
+        background-color: #081b29;
+        color: #00d4ff;
+        text-transform: uppercase;
+    }
+
+    td {
+        color: #e0e0e0;
+    }
+
+    td a {
+        color: #00d4ff;
+        text-decoration: none;
+    }
+
+    td a:hover {
+        text-decoration: underline;
+    }
+
+    @media screen and (max-width: 768px) {
+        .card {
+            max-width: 100%;
+        }
+    }
+
+</style>
+
+
+{% endblock content %}

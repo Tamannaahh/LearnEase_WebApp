@@ -1,0 +1,79 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<section class="text-center container">
+
+    <div class="container">
+
+        <div class="content-section p-0 mt-5">
+
+            <div class="m-3">
+                <h2>{{notes.title}}</h2>
+            </div>
+
+            <hr class="p-0 m-0">
+            <p class="description m-5 p-5">
+                {{notes.description}}
+            </p>
+            <hr>
+        </div>
+
+    </div>
+
+</section>
+
+<style>
+  
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .content-section {
+        width: 80%;
+        max-width: 800px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: #007bff; /* Blue color */
+        margin: 20px 0;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: white;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 10px 0;
+    }
+
+    @media (max-width: 768px) {
+        .content-section {
+            width: 90%;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        .description {
+            font-size: 1rem;
+            padding: 15px;
+        }
+    }
+</style>
+
+{% endblock content %}

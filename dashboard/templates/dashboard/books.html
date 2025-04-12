@@ -1,0 +1,153 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<section class="container my-5 text-center">
+    <h2 class="text-primary mb-3">Search Books and Browse Your Favorites</h2>
+    <p class="text-light mb-4">Enter a search query to discover amazing books!</p>
+    <form action="" method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center">
+            {{ form.as_p }}
+            <input class="btn btn-primary ms-2 px-4" type="submit" value="Search">
+        </div>
+    </form>
+
+    {% if results %}
+        <div class="row gy-4 gx-4">
+            {% for result in results %}
+            <div class="col-md-6 col-lg-4">
+                <a href="{{ result.preview }}" target="_blank" class="text-decoration-none">
+                    <div class="card shadow-lg h-100 bg-gradient text-light">
+                        <div class="row g-0">
+                            <div class="col-4">
+                                {% if result.thumbnail %}
+                                    <img class="img-fluid rounded-start w-100" style="height: 150px;" src="{{ result.thumbnail }}" alt="{{ result.title }}">
+                                {% else %}
+                                    <img class="img-fluid rounded-start w-100" style="height: 150px;" src="{% static 'images/default_book.jpg' %}" alt="No Thumbnail Available">
+                                {% endif %}
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ result.title }}</h5>
+                                    {% if result.subtitle %}
+                                        <h6 class="card-subtitle text-info">{{ result.subtitle }}</h6>
+                                    {% endif %}
+                                    {% if result.description %}
+                                        <p class="card-text mt-2">
+                                            {{ result.description|slice:":100" }}...
+                                        </p>
+                                    {% endif %}
+
+
+                                    {% if result.categories %}
+                                        <p class="text-info mb-1">
+                                            <strong>Category:</strong> 
+                                            {{ result.categories|join:", " }}
+                                        </p>
+                                    {% endif %}
+                                    {% if result.count %}
+                                        <p class="text-light mb-1">
+                                            <strong>Pages:</strong> {{ result.count }}
+                                        </p>
+                                    {% endif %}
+                                    {% if result.rating %}
+                                        <p class="text-warning mb-1">
+                                            <strong>Rating:</strong> {{ result.rating }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h4 style="color: #dc3545; text-align: center; margin-top: 50px; font-size: 1.5rem;">
+            No results found. Try searching for a different book.</h4>
+    {% endif %}
+</section>
+
+
+<style>
+    /* General Section Styles */
+    {% comment %} section {
+        background-color: #081b29;
+        padding: 40px;
+        border-radius: 15px;
+    } {% endcomment %}
+
+    h2 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        color: #00d4ff;
+    }
+
+    p {
+        font-family: 'Arial', sans-serif;
+        color: #ffffff;
+    }
+
+    /* Card Styles */
+    .card {
+        background-color: #0e2433;
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 10px;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #00d4ff;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        color: #e0e0e0;
+    }
+
+    .card-subtitle {
+        color: #80d4ff;
+    }
+
+    /* Button Styles */
+    .btn-primary {
+        background-color: #00b894;
+        border-color: #00b894;
+        border-radius: 25px;
+        font-size: 1rem;
+    }
+
+    .btn-primary:hover {
+        background-color: #007d5c;
+        border-color: #007d5c;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card-title {
+            font-size: 1rem;
+        }
+
+        .card-text {
+            font-size: 0.8rem;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+
+{% endblock content %}

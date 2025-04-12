@@ -1,0 +1,237 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %} 
+{% block content %}
+<section class="text-center container">
+    <h2 style="color: #00d4ff;">Search Videos in MediaHub</h2>
+    <p style="color: #b0c4de;">Search videos and select any video to open in YouTube</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-danger" type="submit" value="Search">
+    </form><br>
+
+    {% for result in results %}
+    <a href="{{ result.link }}" target="_blank">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-5">
+                        {% if result.thumbnails %}
+                            <img class="img-fluid" src="{{ result.thumbnails }}" alt="Video Thumbnail">
+                        {% else %}
+                            <p>No Thumbnail Available</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        <h3 class="p-0 m-0" style="color: #fff;">{{ result.title }}</h3>
+                        <b>
+                            <u>
+                                <h5 class="p-0 m-0" style="color: #00d4ff;">{{ result.channel }}</h5>
+                            </u>
+                        </b>
+                        <h6 class="p-0 m-1" style="color: #b0c4de;">{{ result.description }}</h6>
+                        <b>
+                            <h6 class="ml-0 mt-3" style="color: #fff;">{{ result.duration }}</h6>
+                            <h6 class="ml-0 mt-1" style="color: #fff;">{{ result.views }}</h6>
+                            <h6 class="ml-0 mt-1" style="color: #fff;">{{ result.published }}</h6>
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+    <br>
+</section>
+
+{% endblock content %}
+
+<style>
+    /* Resetting some defaults for better cross-browser consistency */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000d1a; /* Dark background */
+        color: #fff; /* White text */
+    }
+
+    .container {
+        margin-top: 50px;
+        max-width: 1200px;
+        padding: 0 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: #00d4ff; /* Cyan for title */
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    p {
+        color: #b0c4de; /* Soft blue for paragraph */
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+
+    form {
+        margin-bottom: 40px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        font-size: 1rem;
+        color: #555;
+    }
+
+    input[type="submit"] {
+        background-color: #00b894;
+        color: #fff;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #009c7f;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-header {
+        display: flex;
+        padding: 15px;
+    }
+
+    .card-header .row {
+        display: flex;
+        width: 100%;
+    }
+
+    .card-header .col-md-5 {
+        width: 40%;
+        padding-right: 15px;
+    }
+
+    .card-header .col-md-7 {
+        width: 60%;
+    }
+
+    .card-header img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .card-header img:hover {
+        transform: scale(1.05);
+    }
+
+    .card-header h3 {
+        color: #333;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-header h5 {
+        color: #777;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .card-header h6 {
+        color: #555;
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .card-header b {
+        font-weight: 600;
+    }
+
+    .card-header .ml-0 {
+        margin-left: 0;
+    }
+
+    .card-header .mt-3,
+    .card-header .mt-1 {
+        margin-top: 10px;
+    }
+
+    .card-header a {
+        color: #00b894;
+        text-decoration: none;
+    }
+
+    .card-header a:hover {
+        text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+        margin-top: 50px;
+        text-align: center;
+        padding: 20px 0;
+        background-color: #333;
+        color: #fff;
+    }
+
+    footer p {
+        font-size: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card-header {
+            flex-direction: column;
+        }
+
+        .card-header .col-md-5 {
+            width: 100%;
+            padding-right: 0;
+        }
+
+        .card-header .col-md-7 {
+            width: 100%;
+        }
+
+        .card-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .card-header h5 {
+            font-size: 1rem;
+        }
+
+        .card-header h6 {
+            font-size: 0.9rem;
+        }
+    }
+</style>
